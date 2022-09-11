@@ -1,9 +1,9 @@
 <template>
   <p class="job-order">Orderd by {{ order }}</p>
-  <ul class="job-list">
-    <li class="job-list_item" v-for="job of jobs" :key="job.id">
+  <transition-group name="flip-list" class="job-list" tag="ul">
+    <li class="job-list_item" v-for="job of orderedJobs" :key="job.id">
       <h2 class="job-list_item__title">
-        {{ job.title }} in {{ job.location }}
+        <span>{{ job.title }} </span> in <span>{{ job.location }}</span>
       </h2>
       <p class="job-list_item__salary">{{ job.salary }} dollars</p>
       <p class="job-list_item__description">
@@ -13,11 +13,11 @@
         ipsa tempore aspernatur officia?
       </p>
     </li>
-  </ul>
+  </transition-group>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import Job from "../types/Job";
 import OrderTerm from "../types/OrderTerm";
 
@@ -33,10 +33,21 @@ export default defineComponent({
       type: String as PropType<OrderTerm>,
     },
   },
+  setup(props) {
+    const orderedJobs = computed(() => {
+      return [...props.jobs].sort((job1: Job, job2: Job) => {
+        return job1[props.order] > job2[props.order] ? 1 : -1;
+      });
+    });
+    return { orderedJobs };
+  },
 });
 </script>
 
 <style lang="scss" scoped>
+.flip-list-move {
+  transition: transform 0.5s;
+}
 .job {
   &-order {
     width: 80%;
@@ -52,6 +63,10 @@ export default defineComponent({
       margin: 15px auto;
       &__title {
         background: white;
+        & > span {
+          background: white;
+          text-transform: capitalize;
+        }
       }
       &__salary {
         background: white;

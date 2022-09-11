@@ -26,13 +26,39 @@ export default defineComponent({
   components: { JobList },
   setup() {
     const jobs = ref<Job[]>([
-      { id: 0, title: "title 1", location: "location 1", salary: 100000 },
-      { id: 1, title: "title 2", location: "location 2", salary: 200000 },
-      { id: 2, title: "title 3", location: "location 3", salary: 300000 },
-      { id: 3, title: "title 4", location: "location 4", salary: 400000 },
-      { id: 4, title: "title 5", location: "location 5", salary: 500000 },
-      { id: 5, title: "title 6", location: "location 6", salary: 600000 },
-      { id: 6, title: "title 7", location: "location 7", salary: 700000 },
+      { id: 1, title: "farm worker", location: "lon lon ranch", salary: 30000 },
+      { id: 2, title: "quarryman", location: "death mountain", salary: 40000 },
+      {
+        id: 3,
+        title: "flute player",
+        location: "the lost woods",
+        salary: 35000,
+      },
+      { id: 4, title: "fisherman", location: "lake hylia", salary: 21000 },
+      {
+        id: 5,
+        title: "prison guard",
+        location: "gerudo valley",
+        salary: 32000,
+      },
+      {
+        id: 6,
+        title: "Yandex",
+        location: "Moscow",
+        salary: 42000,
+      },
+      {
+        id: 7,
+        title: "Sber",
+        location: "Samara",
+        salary: 12000,
+      },
+      {
+        id: 8,
+        title: "Ozon",
+        location: "Saint-Petersburg",
+        salary: 32500,
+      },
     ]);
     const order = ref<OrderTerm>("title");
 
